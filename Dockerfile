@@ -1,4 +1,4 @@
-FROM rubensa/systemd
+FROM rubensa/ubuntu-systemd
 LABEL author="Ruben Suarez <rubensa@gmail.com>"
 
 # Add systemd unit to fix user USER_ID and GROUP_ID
