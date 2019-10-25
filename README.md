@@ -32,6 +32,8 @@ prepare_docker_user_and_group() {
   BUILD_ARGS+=" --build-arg GROUP=$GROUP_NAME"
 }
 
+prepare_docker_user_and_group
+
 docker build --no-cache \
   -t "rubensa/ubuntu-systemd-user" \
   --label "maintainer=Ruben Suarez <rubensa@gmail.com>" \
@@ -51,11 +53,6 @@ You can run the container like this (change --rm with -d if you don't want the c
 USER_ID=$(id -u)
 GROUP_ID=$(id -g)
 
-prepare_docker_user_and_group() {
-  ENV_VARS+=" --env=USER_ID=$USER_ID"
-  ENV_VARS+=" --env=GROUP_ID=$GROUP_ID"
-}
-
 prepare_docker_systemd() {
   MOUNTS+=" --mount type=tmpfs,destination=/tmp"
   MOUNTS+=" --mount type=tmpfs,destination=/run"
@@ -68,9 +65,14 @@ prepare_docker_timezone() {
   MOUNTS+=" --mount type=bind,source=/etc/localtime,target=/etc/localtime,readonly"
 }
 
-prepare_docker_user_and_group
+prepare_docker_user_and_group() {
+  ENV_VARS+=" --env=USER_ID=$USER_ID"
+  ENV_VARS+=" --env=GROUP_ID=$GROUP_ID"
+}
+
 prepare_docker_systemd
 prepare_docker_timezone
+prepare_docker_user_and_group
 
 docker run --rm -it \
   --name "ubuntu-systemd-user" \
