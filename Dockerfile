@@ -34,6 +34,12 @@ RUN apt-get update \
     && addgroup --gid ${GROUP_ID} ${GROUP} \
     && adduser --uid ${USER_ID} --ingroup ${GROUP} --home /home/${USER} --shell /bin/bash --disabled-password --gecos "User" ${USER} \
     #
+    # Create some user directories
+    && mkdir -p /home/${USER}/.config \
+    && mkdir -p /home/${USER}/.local/bin \
+    && chown ${USER}:${GROUP} /home/${USER}/.config \
+    && chown ${USER}:${GROUP} /home/${USER}/.local/bin \
+    #
     # Set default non-root user umask to 002 to give group all file permissions
     # Allow override by setting UMASK_SET environment variable
     && printf "\nUMASK_SET=\${UMASK_SET:-002}\numask \"\$UMASK_SET\"\n" >> /home/${USER}/.bashrc \

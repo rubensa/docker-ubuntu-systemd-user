@@ -78,7 +78,7 @@ IMAGE_USER=user
 docker exec -it \
   -u $IMAGE_USER \
   -w /home/$IMAGE_USER \
-  "ubuntu-systemd-user" \
+  ubuntu-systemd-user \
   bash -l
 ```
 
@@ -92,7 +92,7 @@ You can stop the running container like this:
 #!/usr/bin/env bash
 
 docker stop \
-  "ubuntu-systemd-user"
+  ubuntu-systemd-user
 ```
 
 ## Start
@@ -102,5 +102,5 @@ If you run the container without --rm you can start it again like this:
 ```
 #!/usr/bin/env bash
 
-docker start "ubuntu-systemd-user"
+docker start ubuntu-systemd-user
 ```
