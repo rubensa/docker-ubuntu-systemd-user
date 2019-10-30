@@ -38,6 +38,7 @@ RUN apt-get update \
     && mkdir -p /home/${USER}/.config \
     && mkdir -p /home/${USER}/.local/bin \
     && chown ${USER}:${GROUP} /home/${USER}/.config \
+    && chown ${USER}:${GROUP} /home/${USER}/.local \
     && chown ${USER}:${GROUP} /home/${USER}/.local/bin \
     #
     # Set default non-root user umask to 002 to give group all file permissions
